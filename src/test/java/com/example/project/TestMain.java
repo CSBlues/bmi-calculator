@@ -1,31 +1,46 @@
 package com.example.project;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
-import java.io.*;
 
 public class TestMain {
 
-   @Test
-   public void testHelloWorld()
-   {
-     PrintStream originalOut = System.out;
-     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-     System.setOut(new PrintStream(bos));
+    @Test
+    public void testBMI() {
+        double bmiResult = Main.bmi(75.0,225.0);
+        double expectedResult = (225.0/Math.pow(75,2))*703;
+        assertEquals(expectedResult, bmiResult, "Expected: " + expectedResult + ". Received: " + bmiResult);
+    }
+    @Test
+    public void testUnderweight() {
+        String weightClassResult = Main.weightClass(75.0, 145.0);
+        String expectedResult = "underweight";
+        assertEquals(expectedResult, weightClassResult, "Expected: " + expectedResult + ". Received: " + weightClassResult);
 
-     // action
-     Main.main(null);
+    }
+    @Test
+    public void testNormal() {
+        String weightClassResult = Main.weightClass(75.0, 165.0);
+        String expectedResult = "normal";
+        assertEquals(expectedResult, weightClassResult, "Expected: " + expectedResult + ". Received: " + weightClassResult);
 
-     // assertion
-     assertEquals("Hello world!\n", bos.toString());
+    }
+    @Test
+    public void testOverweight() {
+        String weightClassResult = Main.weightClass(75.0, 145.0);
+        String expectedResult = "overweight";
+        assertEquals(expectedResult, weightClassResult, "Expected: " + expectedResult + ". Received: " + weightClassResult);
 
-     // undo the binding in System
-     System.setOut(originalOut);
-   }
+    }
+    @Test
+    public void testObese() {
+        String weightClassResult = Main.weightClass(75.0, 145.0);
+        String expectedResult = "obese";
+        assertEquals(expectedResult, weightClassResult, "Expected: " + expectedResult + ". Received: " + weightClassResult);
+
+    }
+
+
 }
